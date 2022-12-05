@@ -6,6 +6,8 @@ Trickier input parsing today
 import copy
 from dataclasses import dataclass
 
+from tools.common import file_to_list, reverse_string
+
 
 class Stack:
 
@@ -39,16 +41,10 @@ class Move:
     trg: int
 
 
-def reverse_string(in_str: str) -> str:
-    return in_str[::-1]
-
-
 #
 # Load stacks
 #
-with open('input/day5-stacks.txt') as f:
-    lines = f.readlines()
-lines = [line.strip() for line in lines]
+lines = file_to_list("day5-stacks.txt")
 
 stacks = []
 for idx in range(0, 9):
@@ -69,9 +65,7 @@ save_init_stack = stacks.copy()
 #
 # Load moves
 #
-with open('input/day5-moves.txt') as f:
-    lines = f.readlines()
-lines = [line.strip() for line in lines]
+lines = file_to_list("day5-moves.txt")
 moves = [line.split(" ") for line in lines]
 moves = [Move(int(m[1]), int(m[3]) - 1, int(m[5]) - 1) for m in moves]
 
