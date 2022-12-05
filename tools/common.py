@@ -14,6 +14,13 @@ def file_to_list(filename: str):
     return [line.strip() for line in lines]
 
 
+def file_to_string(filename: str):
+    """Read whole file as string"""
+    with open(f"input/{filename}") as f:
+        content = f.read()
+    return content
+
+
 class DequeMulti(deque):
     """extend deque for multiple items"""
 
@@ -91,4 +98,3 @@ def unique_characters(text: str) -> Counter:
     for ch in text:
         cnt[ch] += 1
     return cnt
-
