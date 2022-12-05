@@ -29,10 +29,14 @@ class DequeMulti(col.deque):
         return res
 
     def multi_append(self, stuff: list):
+        """same as extend"""
         for thing in stuff:
             self.append(thing)
 
     def multi_appendleft(self, stuff: list):
+        """not the same as extendleft which appendsleft 1 at a time
+        and so reverses the order of stuff
+        This will add the block of stuff to left without reversing"""
         for thing in reversed(stuff):
             self.appendleft(thing)
 
