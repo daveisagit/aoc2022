@@ -1,4 +1,5 @@
-import collections as col
+"""Some common file/string/data utility functions"""
+from collections import Counter, deque
 
 
 def reverse_string(in_str: str) -> str:
@@ -13,8 +14,20 @@ def file_to_list(filename: str):
     return [line.strip() for line in lines]
 
 
-class DequeMulti(col.deque):
+class DequeMulti(deque):
     """extend deque for multiple items"""
+
+    def contents(self):
+        res = []
+        for idx in range(len(self)):
+            res.append(self[idx])
+        return res
+
+    def contents_as_string(self):
+        s = ""
+        for idx in range(len(self)):
+            s += str((self[idx]))
+        return s
 
     def multi_pop(self, amount=1):
         res = []
@@ -64,3 +77,18 @@ def split_into_groups(a_list, size):
     """Split a list into groups"""
     for idx in range(0, len(a_list), size):
         yield a_list[idx:idx + size]
+
+
+def window_over_string(text: str, width: int):
+    """Generator of substrings as a fixed width window over """
+    for idx in range(len(text) - width + 1):
+        yield text[idx:idx + width]
+
+
+def unique_characters(text: str) -> Counter:
+    """Counter is a dict, key is the character, value is the number of occurrences"""
+    cnt = Counter()
+    for ch in text:
+        cnt[ch] += 1
+    return cnt
+
