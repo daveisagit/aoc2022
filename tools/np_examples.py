@@ -46,7 +46,7 @@ for idx, val in np.ndenumerate(g):
     c = idx[1]
 
 
-print(h)
+print(h < g3)
 
 
 

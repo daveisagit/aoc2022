@@ -1,6 +1,8 @@
 """Some common file/string/data utility functions"""
 from collections import Counter, deque
 
+import numpy as np
+
 
 def reverse_string(in_str: str) -> str:
     """Python reversing by slices"""
@@ -98,3 +100,27 @@ def unique_characters(text: str) -> Counter:
     for ch in text:
         cnt[ch] += 1
     return cnt
+
+
+class Grid_2d():
+
+    directions = [
+        np.array([0, 1]),
+        np.array([0, -1]),
+        np.array([1, 0]),
+        np.array([-1, 0]),
+    ]
+
+    def __init__(self, rows, cols):
+        self.rows = rows
+        self.cols = cols
+        self.border_min = np.array([0, 0])
+        self.border_max = np.array([rows, cols])
+
+    def adjacent_positions(self, current_position: np.array):
+        """Generator of possible adjacent positions for a given position"""
+        for direction in self.directions:
+            next_position = np.add(direction, current_position)
+            if (self.border_min <= next_position).all() and (next_position < self.border_max).all():
+                yield next_position
+
