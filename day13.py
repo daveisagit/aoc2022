@@ -1,4 +1,4 @@
-""" Day 13 in the AoC house -
+""" Day 13 in the AoC house - combi parser
 time taken : 2hr
 leaderboard 2,2
 
