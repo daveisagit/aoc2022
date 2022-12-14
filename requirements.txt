@@ -2,3 +2,4 @@ numpy~=1.23.5
 pytest~=7.2.0
 pydantic~=1.10.2
 anytree~=2.8.0
+shapely~=2.0.0

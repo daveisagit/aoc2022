@@ -5,10 +5,10 @@ Point = namedtuple(
 )
 
 ORTHOGONAL_DIRECTIONS = (
-    Point(1, 0),
-    Point(0, 1),
-    Point(-1, 0),
-    Point(0, -1),
+    Point(1, 0),  # right
+    Point(0, 1),  # down
+    Point(-1, 0),  # left
+    Point(0, -1),  # up
 )
 
 DIAGONAL_DIRECTIONS = (
@@ -86,6 +86,11 @@ def orthogonal_points(p: Point, dist=1, directions=ORTHOGONAL_DIRECTIONS):
     for direction in directions:
         trg = Point(*[o * dist for o in direction])
         yield point_add(p, trg)
+
+
+def manhattan_distance(a: Point, b: Point) -> int:
+    t = point_sub(a, b)
+    return abs(t.x) + abs(t.y)
 
 
 assert Point(4, 5) == (4, 5)

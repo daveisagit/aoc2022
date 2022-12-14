@@ -27,3 +27,21 @@ t = s.indices(len(odds))
 print(f"tuple of indexes is t={t}")
 print([x for x in range(*t)])
 print(odds[s])
+
+x = range(4,10)
+y = range(9,12)
+
+
+def range_intersect(r1, r2):
+    return range(max(r1.start,r2.start), min(r1.stop,r2.stop)) or None
+
+
+def range_union(r1, r2):
+    if range_intersect(r1, r2):
+        return range(min(r1.start,r2.start), max(r1.stop,r2.stop))
+    return None
+
+
+
+z = range_union(x,y)
+print(z)
