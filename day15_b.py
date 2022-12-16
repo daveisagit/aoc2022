@@ -5,10 +5,13 @@ leaderboard 2
 shapely was a life saver
 
 """
+from time import time
+
 from tools.common import file_to_list
 from tools.grid import manhattan_distance, orthogonal_points, Point as pnt
 from shapely import box, difference, Polygon
 
+stm = time()
 lines = file_to_list("day15.txt")
 
 beacons = []
@@ -41,8 +44,8 @@ for i, s in enumerate(sensors):
 
 
 def output_result(g):
-    print()
-    print(g)
+    # print()
+    # print(g)
     min_x, min_y, max_x, max_y = g.bounds
     x = int(min_x + max_x) // 2
     y = int(min_y + max_y) // 2
@@ -58,6 +61,10 @@ if land.geom_type == "MultiPolygon":
 else:
     output_result(land)
 
+etm = time()
+
+elapsed_time = etm - stm
+print(f"Execution time: {elapsed_time * 1000:3.5} ms")
 
 # not used but might useful another time
 def extract_poly_coords(geom):
