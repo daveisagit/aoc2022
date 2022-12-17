@@ -45,3 +45,5 @@ def range_union(r1, r2):
 
 z = range_union(x,y)
 print(z)
+
+print(list(range(10,-1,-1)))
