@@ -26,7 +26,7 @@ def parse_points(points, edge_length=1):
     for idx, p in enumerate(sorted(points)):
         p = Point(*p)
 
-        vg.add_node(idx, points={p}, faces={})
+        vg.add_node(idx, points={p}, faces=set())
         v = map_point_to_node(vg, p)
 
         p_n = Point(p.row - 1, p.col)
