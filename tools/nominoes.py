@@ -133,14 +133,6 @@ def draw_nets(nets, inc_cube_net=False, inc_dihedral=False):
                     cubenet.draw_net(cb)
 
 
-
-# def has_2x2(net):
-#     for tile in net:
-#         for chk in corners(tile):
-#             if chk in net:
-#                 return True
-#     return False
-
 def cube_net(net):
     points = net_points(net)
     vg = parse_points(points)
