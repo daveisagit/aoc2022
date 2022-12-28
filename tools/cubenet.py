@@ -8,6 +8,16 @@ Point = namedtuple(
 )
 
 
+def limit_nw(points):
+    x, y = zip(*points)
+    return min(x), min(y)
+
+
+def limit_se(points):
+    x, y = zip(*points)
+    return max(x), max(y)
+
+
 def map_point_to_node(vg, p: Point):
     possible = [n for n, d in vg.nodes().items() if p in d["points"]]
     if len(possible) > 1:
@@ -86,8 +96,8 @@ def dump_net_data(vg):
 def draw_net(vg, scale=4, labels="ABCDEFGHIJKLMN"):
     print()
     points = sorted([p for n in vg.nodes(data=True) for p in list(n[1]["points"])])
-    sz = max(points)
-    sz = (scale * sz.row + 1, scale * sz.col + 1)
+    sz = Point(*limit_se(points))
+    sz = (scale * (sz.row + 1), scale * (sz.col + 1))
     net_layout = np.full(sz, dtype=str, fill_value=" ")
     label = {}
     for i, v in enumerate(sorted(vg.nodes)):

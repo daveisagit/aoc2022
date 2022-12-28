@@ -1,5 +1,6 @@
 import numpy as np
 
+from tools import cubenet
 from tools.cubenet import cubify, parse_points
 
 DIRECTIONS = [
@@ -111,12 +112,26 @@ def nets_of_size(sz):
     return nets
 
 
-def draw_nets(nets):
-    for net in nets:
+def draw_nets(nets, inc_cube_net=False, inc_dihedral=False):
+    for idx, net in enumerate(nets):
         print()
-        # print(net)
-        draw_net(net)
-        # print(net_points(net))
+        print("==========================================")
+        print(f"Net #: {idx+1}")
+        print("==========================================")
+        di_nets = [net]
+        if inc_dihedral:
+            di_nets = list(dihedral_nets(net))
+
+        for x, net in enumerate(di_nets):
+            if inc_dihedral:
+                print(f"{idx+1}.({chr(ord('a') + x)})")
+                print()
+            draw_net(net)
+            if inc_cube_net:
+                cb = cube_net(net)
+                if cb:
+                    cubenet.draw_net(cb)
+
 
 
 # def has_2x2(net):
@@ -126,21 +141,26 @@ def draw_nets(nets):
 #                 return True
 #     return False
 
+def cube_net(net):
+    points = net_points(net)
+    vg = parse_points(points)
+    return cubify(vg)
+
 
 def cube_nets(nets):
     cub_nets = []
     for net in nets:
-        points = net_points(net)
-        vg = parse_points(points)
-        cub = cubify(vg)
+        cub = cube_net(net)
         if cub:
             cub_nets.append(net)
     return tuple(cub_nets)
 
 
 all_nets = nets_of_size(6)
-print(f"Number of nets: {len(all_nets)}")
+print(f"Number of hexominoes: {len(all_nets)}")
 all_nets = cube_nets(all_nets)
-draw_nets(all_nets)
+draw_nets(all_nets, inc_cube_net=True, inc_dihedral=True)
 print(f"Number of cube nets: {len(all_nets)}")
+
+
 
