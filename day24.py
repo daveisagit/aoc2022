@@ -3,13 +3,8 @@ time taken :
 leaderboard
 
 """
-import math
-from collections import Counter, deque, namedtuple
+from collections import Counter, deque
 from time import time
-
-import numpy as np
-
-from tools.common import file_to_string
 
 OPTIONS = (
     (0, 1), (1, 0), (0, -1), (-1, 0), (0, 0)
