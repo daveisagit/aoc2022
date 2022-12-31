@@ -1,3 +1,7 @@
+"""
+https://oeis.org/A000105
+"""
+
 import numpy as np
 
 from tools import cubenet
@@ -105,10 +109,12 @@ def draw_net(net):
         print("".join(row))
 
 
-def nets_of_size(sz):
+def nets_of_size(sz, print_working=False):
     nets = None
     for i in range(sz):
         nets = next_set(nets)
+        if print_working:
+            print(f"Nominoe size={i+1} : nets={len(nets)}")
     return nets
 
 
@@ -139,18 +145,19 @@ def cube_net(net):
     return cubify(vg)
 
 
-def cube_nets(nets):
+def cube_nets(nets, progress=False):
     cub_nets = []
-    for net in nets:
+    for i, net in enumerate(nets):
+        if progress:
+            print(f"{i+1} of {len(nets)}")
         cub = cube_net(net)
         if cub:
             cub_nets.append(net)
     return tuple(cub_nets)
 
 
-all_nets = nets_of_size(6)
-print(f"Number of hexominoes: {len(all_nets)}")
-all_nets = cube_nets(all_nets)
+all_nets = nets_of_size(10, print_working=True)
+all_nets = cube_nets(all_nets, progress=True)
 draw_nets(all_nets, inc_cube_net=True, inc_dihedral=True)
 print(f"Number of cube nets: {len(all_nets)}")
 

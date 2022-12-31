@@ -93,7 +93,7 @@ def dump_net_data(vg):
         print(n)
 
 
-def draw_net(vg, scale=4, labels="ABCDEFGHIJKLMN"):
+def draw_net(vg, scale=4, labels=None):
     print()
     points = sorted([p for n in vg.nodes(data=True) for p in list(n[1]["points"])])
     sz = Point(*limit_se(points))
@@ -101,7 +101,10 @@ def draw_net(vg, scale=4, labels="ABCDEFGHIJKLMN"):
     net_layout = np.full(sz, dtype=str, fill_value=" ")
     label = {}
     for i, v in enumerate(sorted(vg.nodes)):
-        label[v] = labels[i]
+        if labels:
+            label[v] = labels[i]
+        else:
+            label[v] = chr(ord("A") + i)
 
     for e in vg.edges():
         for p1 in list(vg.nodes[e[0]]["points"]):
@@ -178,7 +181,8 @@ def is_solved(vg) -> bool:
     """Once the final fold as happened the Euler char being 2 will mean
     all faces are accounted for and there no extra external region"""
     deg_3 = [v for v in vg.nodes if len(vg.edges(v)) == 3]
-    if len(vg.edges) - len(vg.nodes) == 4 and len(deg_3) == len(vg.nodes):
+    # if len(vg.edges) - len(vg.nodes) == 4 and len(deg_3) == len(vg.nodes):
+    if len(vg.edges) - len(vg.nodes) == 4:
         return True
     return False
 
