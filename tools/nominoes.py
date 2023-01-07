@@ -156,10 +156,7 @@ def cube_nets(nets, progress=False):
     return tuple(cub_nets)
 
 
-all_nets = nets_of_size(10, print_working=True)
-all_nets = cube_nets(all_nets, progress=True)
-draw_nets(all_nets, inc_cube_net=True, inc_dihedral=True)
-print(f"Number of cube nets: {len(all_nets)}")
-
-
-
+# all_nets = nets_of_size(10, print_working=True)
+# all_nets = cube_nets(all_nets, progress=True)
+# draw_nets(all_nets, inc_cube_net=True, inc_dihedral=True)
+# print(f"Number of cube nets: {len(all_nets)}")
